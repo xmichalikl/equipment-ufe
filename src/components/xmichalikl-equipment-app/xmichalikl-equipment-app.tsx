@@ -14,6 +14,7 @@ declare global {
 export class XmichaliklEquipmentApp {
   @State() private relativePath = '';
   @Prop() basePath: string = '';
+  @Prop() apiBase: string;
 
   componentWillLoad() {
     const baseUri = new URL(this.basePath, document.baseURI || '/').pathname;
@@ -43,7 +44,10 @@ export class XmichaliklEquipmentApp {
     return (
       <Host>
         {path === 'ambulance-list' ? (
-          <xmichalikl-ambulance-list onAmbulance-detail={(event: CustomEvent<string>) => this.navigate(`equipment-list/${event.detail}`)}></xmichalikl-ambulance-list>
+          <xmichalikl-ambulance-list
+            api-base={this.apiBase}
+            onAmbulance-detail={(event: CustomEvent<string>) => this.navigate(`equipment-list/${event.detail}`)}
+          ></xmichalikl-ambulance-list>
         ) : path === 'equipment-list' ? (
           <xmichalikl-equipment-list onEquipment-detail={(event: CustomEvent<string>) => this.navigate(`equipment-detail/${event.detail}`)}></xmichalikl-equipment-list>
         ) : path === 'equipment-detail' ? (

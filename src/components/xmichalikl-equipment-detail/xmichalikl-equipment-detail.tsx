@@ -31,7 +31,7 @@ export class XmichaliklEquipmentDetail {
       <Host>
         <div class="title">
           {this.equipmentId ? <h1>Podrobnosti vybavenia</h1> : <h1>Pridanie vybavenia</h1>}
-          <h3>(Ambulancia 1)</h3>
+          <h3>(Ambulancia)</h3>
         </div>
 
         <div id="equipment-detail-form">

@@ -16,7 +16,7 @@ export class XmichaliklEquipmentList {
       <Host>
         <div class="title">
           <h1>Zoznam vybavenia</h1>
-          <h3>(Ambulancia 1)</h3>
+          <h3>(Ambulancia)</h3>
         </div>
 
         <md-list>

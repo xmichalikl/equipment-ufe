@@ -2,6 +2,10 @@
   display: block;
 }
 
+h3.error {
+  color: red;
+}
+
 md-list-item {
   cursor: pointer;
 }

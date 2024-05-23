@@ -7,8 +7,10 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     interface XmichaliklAmbulanceList {
+        "apiBase": string;
     }
     interface XmichaliklEquipmentApp {
+        "apiBase": string;
         "basePath": string;
     }
     interface XmichaliklEquipmentDetail {
@@ -82,9 +84,11 @@ declare global {
 }
 declare namespace LocalJSX {
     interface XmichaliklAmbulanceList {
+        "apiBase"?: string;
         "onAmbulance-detail"?: (event: XmichaliklAmbulanceListCustomEvent<string>) => void;
     }
     interface XmichaliklEquipmentApp {
+        "apiBase"?: string;
         "basePath"?: string;
     }
     interface XmichaliklEquipmentDetail {
