@@ -1,0 +1,28 @@
+:host {
+  display: block;
+}
+
+.title {
+  padding-bottom: 10px;
+}
+
+.title > h3 {
+  color: gray;
+}
+
+md-list {
+  margin-bottom: 20px;
+}
+
+md-list-item {
+  cursor: pointer;
+}
+
+md-list-item:hover {
+  background-color: lightgray;
+}
+
+.actions {
+  display: flex;
+  justify-content: end;
+}

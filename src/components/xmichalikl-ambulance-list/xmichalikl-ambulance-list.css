@@ -1,0 +1,11 @@
+:host {
+  display: block;
+}
+
+md-list-item {
+  cursor: pointer;
+}
+
+md-list-item:hover {
+  background-color: lightgray;
+}

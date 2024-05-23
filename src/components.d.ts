@@ -6,32 +6,109 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
+    interface XmichaliklAmbulanceList {
+    }
     interface XmichaliklEquipmentApp {
+        "basePath": string;
+    }
+    interface XmichaliklEquipmentDetail {
+        "equipmentId": string;
+    }
+    interface XmichaliklEquipmentList {
     }
 }
+export interface XmichaliklAmbulanceListCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLXmichaliklAmbulanceListElement;
+}
+export interface XmichaliklEquipmentListCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLXmichaliklEquipmentListElement;
+}
 declare global {
+    interface HTMLXmichaliklAmbulanceListElementEventMap {
+        "ambulance-detail": string;
+    }
+    interface HTMLXmichaliklAmbulanceListElement extends Components.XmichaliklAmbulanceList, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLXmichaliklAmbulanceListElementEventMap>(type: K, listener: (this: HTMLXmichaliklAmbulanceListElement, ev: XmichaliklAmbulanceListCustomEvent<HTMLXmichaliklAmbulanceListElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLXmichaliklAmbulanceListElementEventMap>(type: K, listener: (this: HTMLXmichaliklAmbulanceListElement, ev: XmichaliklAmbulanceListCustomEvent<HTMLXmichaliklAmbulanceListElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLXmichaliklAmbulanceListElement: {
+        prototype: HTMLXmichaliklAmbulanceListElement;
+        new (): HTMLXmichaliklAmbulanceListElement;
+    };
     interface HTMLXmichaliklEquipmentAppElement extends Components.XmichaliklEquipmentApp, HTMLStencilElement {
     }
     var HTMLXmichaliklEquipmentAppElement: {
         prototype: HTMLXmichaliklEquipmentAppElement;
         new (): HTMLXmichaliklEquipmentAppElement;
     };
+    interface HTMLXmichaliklEquipmentDetailElement extends Components.XmichaliklEquipmentDetail, HTMLStencilElement {
+    }
+    var HTMLXmichaliklEquipmentDetailElement: {
+        prototype: HTMLXmichaliklEquipmentDetailElement;
+        new (): HTMLXmichaliklEquipmentDetailElement;
+    };
+    interface HTMLXmichaliklEquipmentListElementEventMap {
+        "equipment-detail": string;
+        "equipment-add": string;
+    }
+    interface HTMLXmichaliklEquipmentListElement extends Components.XmichaliklEquipmentList, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLXmichaliklEquipmentListElementEventMap>(type: K, listener: (this: HTMLXmichaliklEquipmentListElement, ev: XmichaliklEquipmentListCustomEvent<HTMLXmichaliklEquipmentListElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLXmichaliklEquipmentListElementEventMap>(type: K, listener: (this: HTMLXmichaliklEquipmentListElement, ev: XmichaliklEquipmentListCustomEvent<HTMLXmichaliklEquipmentListElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLXmichaliklEquipmentListElement: {
+        prototype: HTMLXmichaliklEquipmentListElement;
+        new (): HTMLXmichaliklEquipmentListElement;
+    };
     interface HTMLElementTagNameMap {
+        "xmichalikl-ambulance-list": HTMLXmichaliklAmbulanceListElement;
         "xmichalikl-equipment-app": HTMLXmichaliklEquipmentAppElement;
+        "xmichalikl-equipment-detail": HTMLXmichaliklEquipmentDetailElement;
+        "xmichalikl-equipment-list": HTMLXmichaliklEquipmentListElement;
     }
 }
 declare namespace LocalJSX {
+    interface XmichaliklAmbulanceList {
+        "onAmbulance-detail"?: (event: XmichaliklAmbulanceListCustomEvent<string>) => void;
+    }
     interface XmichaliklEquipmentApp {
+        "basePath"?: string;
+    }
+    interface XmichaliklEquipmentDetail {
+        "equipmentId"?: string;
+    }
+    interface XmichaliklEquipmentList {
+        "onEquipment-add"?: (event: XmichaliklEquipmentListCustomEvent<string>) => void;
+        "onEquipment-detail"?: (event: XmichaliklEquipmentListCustomEvent<string>) => void;
     }
     interface IntrinsicElements {
+        "xmichalikl-ambulance-list": XmichaliklAmbulanceList;
         "xmichalikl-equipment-app": XmichaliklEquipmentApp;
+        "xmichalikl-equipment-detail": XmichaliklEquipmentDetail;
+        "xmichalikl-equipment-list": XmichaliklEquipmentList;
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "xmichalikl-ambulance-list": LocalJSX.XmichaliklAmbulanceList & JSXBase.HTMLAttributes<HTMLXmichaliklAmbulanceListElement>;
             "xmichalikl-equipment-app": LocalJSX.XmichaliklEquipmentApp & JSXBase.HTMLAttributes<HTMLXmichaliklEquipmentAppElement>;
+            "xmichalikl-equipment-detail": LocalJSX.XmichaliklEquipmentDetail & JSXBase.HTMLAttributes<HTMLXmichaliklEquipmentDetailElement>;
+            "xmichalikl-equipment-list": LocalJSX.XmichaliklEquipmentList & JSXBase.HTMLAttributes<HTMLXmichaliklEquipmentListElement>;
         }
     }
 }

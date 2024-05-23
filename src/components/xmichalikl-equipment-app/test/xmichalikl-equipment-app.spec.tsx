@@ -7,11 +7,12 @@ describe('xmichalikl-equipment-app', () => {
       components: [XmichaliklEquipmentApp],
       html: `<xmichalikl-equipment-app></xmichalikl-equipment-app>`,
     });
-
-    const app = page.rootInstance as XmichaliklEquipmentApp;
-    const expectedPatients = app?.waitingPatients?.length;
-
-    const items = page.root.shadowRoot.querySelectorAll('md-list-item');
-    expect(items.length).toEqual(expectedPatients);
+    expect(page.root).toEqualHtml(`
+      <xmichalikl-equipment-app>
+        <mock:shadow-root>
+          <slot></slot>
+        </mock:shadow-root>
+      </xmichalikl-equipment-app>
+    `);
   });
 });

@@ -1,0 +1,44 @@
+:host {
+  display: block;
+}
+
+.title {
+  padding-bottom: 10px;
+}
+
+.title > h3 {
+  color: gray;
+}
+
+.form-field > * {
+  display: flex;
+  padding-bottom: 20px;
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+}
+
+.form-row > md-slider {
+  flex: 1;
+}
+
+.form-radios {
+  display: flex;
+  flex: 1;
+}
+
+.form-radios > .form-row {
+  justify-content: right;
+  flex: 1;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: end;
+}
+
+.form-button {
+  margin-left: 10px;
+}

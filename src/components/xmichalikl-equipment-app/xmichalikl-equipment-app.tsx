@@ -1,4 +1,10 @@
-import { Component, Host, h } from '@stencil/core';
+import { Component, Host, Prop, State, h } from '@stencil/core';
+
+declare global {
+  interface Window {
+    navigation: any;
+  }
+}
 
 @Component({
   tag: 'xmichalikl-equipment-app',
@@ -6,59 +12,44 @@ import { Component, Host, h } from '@stencil/core';
   shadow: true,
 })
 export class XmichaliklEquipmentApp {
-  waitingPatients: any[];
+  @State() private relativePath = '';
+  @Prop() basePath: string = '';
 
-  private async getWaitingPatientsAsync() {
-    return await Promise.resolve([
-      {
-        name: 'Jožko Púček',
-        patientId: '10001',
-        since: new Date(Date.now() - 10 * 60).toISOString(),
-        estimatedStart: new Date(Date.now() + 65 * 60).toISOString(),
-        estimatedDurationMinutes: 15,
-        condition: 'Kontrola',
-      },
-      {
-        name: 'Bc. August Cézar',
-        patientId: '10096',
-        since: new Date(Date.now() - 30 * 60).toISOString(),
-        estimatedStart: new Date(Date.now() + 30 * 60).toISOString(),
-        estimatedDurationMinutes: 20,
-        condition: 'Teploty',
-      },
-      {
-        name: 'Ing. Ferdinand Trety',
-        patientId: '10028',
-        since: new Date(Date.now() - 72 * 60).toISOString(),
-        estimatedStart: new Date(Date.now() + 5 * 60).toISOString(),
-        estimatedDurationMinutes: 15,
-        condition: 'Bolesti hrdla',
-      },
-    ]);
+  componentWillLoad() {
+    const baseUri = new URL(this.basePath, document.baseURI || '/').pathname;
+
+    const toRelative = (path: string) => {
+      if (path.startsWith(baseUri)) this.relativePath = path.slice(baseUri.length);
+      else this.relativePath = '';
+    };
+
+    window.navigation?.addEventListener('navigate', (ev: Event) => {
+      if ((ev as any).canIntercept) (ev as any).intercept();
+      let path = new URL((ev as any).destination.url).pathname;
+      toRelative(path);
+    });
+
+    toRelative(location.pathname);
   }
 
-  async componentWillLoad() {
-    this.waitingPatients = await this.getWaitingPatientsAsync();
+  navigate(path: string) {
+    const absolute = new URL(path, new URL(this.basePath, document.baseURI)).pathname;
+    window.navigation.navigate(absolute);
   }
 
   render() {
+    const [path, id] = this.relativePath.split('/');
+
     return (
       <Host>
-        <md-list>
-          {this.waitingPatients.map(patient => (
-            <md-list-item>
-              <div slot="headline">{patient.name}</div>
-              <div slot="supporting-text">{'Predpokladaný vstup: ' + this.isoDateToLocale(patient.estimatedStart)}</div>
-              <md-icon slot="start">person</md-icon>
-            </md-list-item>
-          ))}
-        </md-list>
+        {path === 'ambulance-list' ? (
+          <xmichalikl-ambulance-list onAmbulance-detail={(event: CustomEvent<string>) => this.navigate(`equipment-list/${event.detail}`)}></xmichalikl-ambulance-list>
+        ) : path === 'equipment-list' ? (
+          <xmichalikl-equipment-list onEquipment-detail={(event: CustomEvent<string>) => this.navigate(`equipment-detail/${event.detail}`)}></xmichalikl-equipment-list>
+        ) : path === 'equipment-detail' ? (
+          <xmichalikl-equipment-detail equipmentId={id ?? ''}></xmichalikl-equipment-detail>
+        ) : null}
       </Host>
     );
-  }
-
-  private isoDateToLocale(iso: string) {
-    if (!iso) return '';
-    return new Date(Date.parse(iso)).toLocaleTimeString();
   }
 }
