@@ -1,5 +1,5 @@
 import { Component, Host, Event, EventEmitter, h, Prop, State } from '@stencil/core';
-import { Ambulance, AmbulanceListApiFactory } from 'src/api/equipment';
+import { Ambulance, AmbulancesApiFactory } from 'src/api/equipment';
 
 @Component({
   tag: 'xmichalikl-ambulance-list',
@@ -21,7 +21,7 @@ export class XmichaliklAmbulanceList {
 
   private async getAmbulanceListAsync(): Promise<Ambulance[]> {
     try {
-      const response = await AmbulanceListApiFactory(undefined, this.apiBase).getAmbulanceList();
+      const response = await AmbulancesApiFactory(undefined, this.apiBase).getAmbulanceList();
       if (response.status < 299) {
         return response.data;
       } else {
