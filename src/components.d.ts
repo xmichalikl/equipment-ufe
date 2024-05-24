@@ -14,14 +14,22 @@ export namespace Components {
         "basePath": string;
     }
     interface XmichaliklEquipmentDetail {
+        "ambulanceId": string;
+        "apiBase": string;
         "equipmentId": string;
     }
     interface XmichaliklEquipmentList {
+        "ambulanceId": string;
+        "apiBase": string;
     }
 }
 export interface XmichaliklAmbulanceListCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLXmichaliklAmbulanceListElement;
+}
+export interface XmichaliklEquipmentDetailCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLXmichaliklEquipmentDetailElement;
 }
 export interface XmichaliklEquipmentListCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -51,7 +59,18 @@ declare global {
         prototype: HTMLXmichaliklEquipmentAppElement;
         new (): HTMLXmichaliklEquipmentAppElement;
     };
+    interface HTMLXmichaliklEquipmentDetailElementEventMap {
+        "equipment-update": string;
+    }
     interface HTMLXmichaliklEquipmentDetailElement extends Components.XmichaliklEquipmentDetail, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLXmichaliklEquipmentDetailElementEventMap>(type: K, listener: (this: HTMLXmichaliklEquipmentDetailElement, ev: XmichaliklEquipmentDetailCustomEvent<HTMLXmichaliklEquipmentDetailElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLXmichaliklEquipmentDetailElementEventMap>(type: K, listener: (this: HTMLXmichaliklEquipmentDetailElement, ev: XmichaliklEquipmentDetailCustomEvent<HTMLXmichaliklEquipmentDetailElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLXmichaliklEquipmentDetailElement: {
         prototype: HTMLXmichaliklEquipmentDetailElement;
@@ -59,7 +78,7 @@ declare global {
     };
     interface HTMLXmichaliklEquipmentListElementEventMap {
         "equipment-detail": string;
-        "equipment-add": string;
+        "go-back": string;
     }
     interface HTMLXmichaliklEquipmentListElement extends Components.XmichaliklEquipmentList, HTMLStencilElement {
         addEventListener<K extends keyof HTMLXmichaliklEquipmentListElementEventMap>(type: K, listener: (this: HTMLXmichaliklEquipmentListElement, ev: XmichaliklEquipmentListCustomEvent<HTMLXmichaliklEquipmentListElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -92,11 +111,16 @@ declare namespace LocalJSX {
         "basePath"?: string;
     }
     interface XmichaliklEquipmentDetail {
+        "ambulanceId"?: string;
+        "apiBase"?: string;
         "equipmentId"?: string;
+        "onEquipment-update"?: (event: XmichaliklEquipmentDetailCustomEvent<string>) => void;
     }
     interface XmichaliklEquipmentList {
-        "onEquipment-add"?: (event: XmichaliklEquipmentListCustomEvent<string>) => void;
+        "ambulanceId"?: string;
+        "apiBase"?: string;
         "onEquipment-detail"?: (event: XmichaliklEquipmentListCustomEvent<string>) => void;
+        "onGo-back"?: (event: XmichaliklEquipmentListCustomEvent<string>) => void;
     }
     interface IntrinsicElements {
         "xmichalikl-ambulance-list": XmichaliklAmbulanceList;

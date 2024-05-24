@@ -2,12 +2,13 @@
   display: block;
 }
 
-.title {
-  padding-bottom: 10px;
+.error {
+  color: red;
 }
 
-.title > h3 {
+.subtitle {
   color: gray;
+  padding-bottom: 10px;
 }
 
 md-list {
@@ -25,4 +26,8 @@ md-list-item:hover {
 .actions {
   display: flex;
   justify-content: end;
+}
+
+.action-button {
+  margin-left: 10px;
 }

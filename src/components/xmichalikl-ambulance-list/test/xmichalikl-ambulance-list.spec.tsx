@@ -2,10 +2,10 @@ import { newSpecPage } from '@stencil/core/testing';
 import { XmichaliklAmbulanceList } from '../xmichalikl-ambulance-list';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import { AmbulanceList } from 'src/api/equipment';
+import { Ambulance } from 'src/api/equipment';
 
 describe('xmichalikl-ambulance-list', () => {
-  const sampleEntries: AmbulanceList[] = [
+  const sampleEntries: Ambulance[] = [
     {
       id: '12345',
       name: 'Ambulancia 1',

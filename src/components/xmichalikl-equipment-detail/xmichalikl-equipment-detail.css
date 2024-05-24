@@ -2,12 +2,17 @@
   display: block;
 }
 
-.title {
-  padding-bottom: 10px;
+.error {
+  color: red;
 }
 
-.title > h3 {
+.info {
+  color: blue;
+}
+
+.subtitle {
   color: gray;
+  padding-bottom: 10px;
 }
 
 .form-field > * {

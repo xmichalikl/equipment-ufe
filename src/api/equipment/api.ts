@@ -26,19 +26,19 @@ import { BASE_PATH, COLLECTION_FORMATS, BaseAPI, RequiredError } from './base';
 /**
  * 
  * @export
- * @interface AmbulanceList
+ * @interface Ambulance
  */
-export interface AmbulanceList {
+export interface Ambulance {
     /**
      * Unique identifier for the ambulance
      * @type {string}
-     * @memberof AmbulanceList
+     * @memberof Ambulance
      */
     'id': string;
     /**
      * Name of the ambulance
      * @type {string}
-     * @memberof AmbulanceList
+     * @memberof Ambulance
      */
     'name': string;
 }
@@ -99,7 +99,7 @@ export const AmbulanceListApiAxiosParamCreator = function (configuration?: Confi
          * @throws {RequiredError}
          */
         getAmbulanceList: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/ambulance-list`;
+            const localVarPath = `/ambulances`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -138,7 +138,7 @@ export const AmbulanceListApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getAmbulanceList(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<AmbulanceList>>> {
+        async getAmbulanceList(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Ambulance>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getAmbulanceList(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -158,7 +158,7 @@ export const AmbulanceListApiFactory = function (configuration?: Configuration, 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getAmbulanceList(options?: any): AxiosPromise<Array<AmbulanceList>> {
+        getAmbulanceList(options?: any): AxiosPromise<Array<Ambulance>> {
             return localVarFp.getAmbulanceList(options).then((request) => request(axios, basePath));
         },
     };
@@ -177,7 +177,7 @@ export interface AmbulanceListApiInterface {
      * @throws {RequiredError}
      * @memberof AmbulanceListApiInterface
      */
-    getAmbulanceList(options?: AxiosRequestConfig): AxiosPromise<Array<AmbulanceList>>;
+    getAmbulanceList(options?: AxiosRequestConfig): AxiosPromise<Array<Ambulance>>;
 
 }
 
@@ -202,6 +202,404 @@ export class AmbulanceListApi extends BaseAPI implements AmbulanceListApiInterfa
 
 
 /**
+ * EquipmentApi - axios parameter creator
+ * @export
+ */
+export const EquipmentApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * Create new equipment to a specific ambulance
+         * @summary Create new equipment to an ambulance
+         * @param {string} ambulanceId ID of the particular ambulance
+         * @param {Equipment} equipment Equipment object that needs to be created
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createEquipment: async (ambulanceId: string, equipment: Equipment, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'ambulanceId' is not null or undefined
+            assertParamExists('createEquipment', 'ambulanceId', ambulanceId)
+            // verify required parameter 'equipment' is not null or undefined
+            assertParamExists('createEquipment', 'equipment', equipment)
+            const localVarPath = `/ambulances/{ambulanceId}/equipment`
+                .replace(`{${"ambulanceId"}}`, encodeURIComponent(String(ambulanceId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(equipment, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Delete a specific equipment item by its ID from a specific ambulance
+         * @summary Delete specific equipment
+         * @param {string} ambulanceId ID of the particular ambulance
+         * @param {string} equipmentId ID of the specific equipment
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteEquipmentById: async (ambulanceId: string, equipmentId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'ambulanceId' is not null or undefined
+            assertParamExists('deleteEquipmentById', 'ambulanceId', ambulanceId)
+            // verify required parameter 'equipmentId' is not null or undefined
+            assertParamExists('deleteEquipmentById', 'equipmentId', equipmentId)
+            const localVarPath = `/ambulances/{ambulanceId}/equipment/{equipmentId}`
+                .replace(`{${"ambulanceId"}}`, encodeURIComponent(String(ambulanceId)))
+                .replace(`{${"equipmentId"}}`, encodeURIComponent(String(equipmentId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Retrieve details of a specific equipment item by its ID from a specific ambulance
+         * @summary Get specific equipment details
+         * @param {string} ambulanceId ID of the particular ambulance
+         * @param {string} equipmentId ID of the specific equipment
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getEquipmentById: async (ambulanceId: string, equipmentId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'ambulanceId' is not null or undefined
+            assertParamExists('getEquipmentById', 'ambulanceId', ambulanceId)
+            // verify required parameter 'equipmentId' is not null or undefined
+            assertParamExists('getEquipmentById', 'equipmentId', equipmentId)
+            const localVarPath = `/ambulances/{ambulanceId}/equipment/{equipmentId}`
+                .replace(`{${"ambulanceId"}}`, encodeURIComponent(String(ambulanceId)))
+                .replace(`{${"equipmentId"}}`, encodeURIComponent(String(equipmentId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Update details of a specific equipment item by its ID from a specific ambulance
+         * @summary Update specific equipment details
+         * @param {string} ambulanceId ID of the particular ambulance
+         * @param {string} equipmentId ID of the specific equipment
+         * @param {Equipment} equipment Equipment object that needs to be updated
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateEquipmentById: async (ambulanceId: string, equipmentId: string, equipment: Equipment, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'ambulanceId' is not null or undefined
+            assertParamExists('updateEquipmentById', 'ambulanceId', ambulanceId)
+            // verify required parameter 'equipmentId' is not null or undefined
+            assertParamExists('updateEquipmentById', 'equipmentId', equipmentId)
+            // verify required parameter 'equipment' is not null or undefined
+            assertParamExists('updateEquipmentById', 'equipment', equipment)
+            const localVarPath = `/ambulances/{ambulanceId}/equipment/{equipmentId}`
+                .replace(`{${"ambulanceId"}}`, encodeURIComponent(String(ambulanceId)))
+                .replace(`{${"equipmentId"}}`, encodeURIComponent(String(equipmentId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(equipment, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * EquipmentApi - functional programming interface
+ * @export
+ */
+export const EquipmentApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = EquipmentApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * Create new equipment to a specific ambulance
+         * @summary Create new equipment to an ambulance
+         * @param {string} ambulanceId ID of the particular ambulance
+         * @param {Equipment} equipment Equipment object that needs to be created
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async createEquipment(ambulanceId: string, equipment: Equipment, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Equipment>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createEquipment(ambulanceId, equipment, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Delete a specific equipment item by its ID from a specific ambulance
+         * @summary Delete specific equipment
+         * @param {string} ambulanceId ID of the particular ambulance
+         * @param {string} equipmentId ID of the specific equipment
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteEquipmentById(ambulanceId: string, equipmentId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteEquipmentById(ambulanceId, equipmentId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Retrieve details of a specific equipment item by its ID from a specific ambulance
+         * @summary Get specific equipment details
+         * @param {string} ambulanceId ID of the particular ambulance
+         * @param {string} equipmentId ID of the specific equipment
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getEquipmentById(ambulanceId: string, equipmentId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Equipment>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getEquipmentById(ambulanceId, equipmentId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Update details of a specific equipment item by its ID from a specific ambulance
+         * @summary Update specific equipment details
+         * @param {string} ambulanceId ID of the particular ambulance
+         * @param {string} equipmentId ID of the specific equipment
+         * @param {Equipment} equipment Equipment object that needs to be updated
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateEquipmentById(ambulanceId: string, equipmentId: string, equipment: Equipment, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Equipment>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateEquipmentById(ambulanceId, equipmentId, equipment, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * EquipmentApi - factory interface
+ * @export
+ */
+export const EquipmentApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = EquipmentApiFp(configuration)
+    return {
+        /**
+         * Create new equipment to a specific ambulance
+         * @summary Create new equipment to an ambulance
+         * @param {string} ambulanceId ID of the particular ambulance
+         * @param {Equipment} equipment Equipment object that needs to be created
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createEquipment(ambulanceId: string, equipment: Equipment, options?: any): AxiosPromise<Equipment> {
+            return localVarFp.createEquipment(ambulanceId, equipment, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Delete a specific equipment item by its ID from a specific ambulance
+         * @summary Delete specific equipment
+         * @param {string} ambulanceId ID of the particular ambulance
+         * @param {string} equipmentId ID of the specific equipment
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteEquipmentById(ambulanceId: string, equipmentId: string, options?: any): AxiosPromise<void> {
+            return localVarFp.deleteEquipmentById(ambulanceId, equipmentId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Retrieve details of a specific equipment item by its ID from a specific ambulance
+         * @summary Get specific equipment details
+         * @param {string} ambulanceId ID of the particular ambulance
+         * @param {string} equipmentId ID of the specific equipment
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getEquipmentById(ambulanceId: string, equipmentId: string, options?: any): AxiosPromise<Equipment> {
+            return localVarFp.getEquipmentById(ambulanceId, equipmentId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Update details of a specific equipment item by its ID from a specific ambulance
+         * @summary Update specific equipment details
+         * @param {string} ambulanceId ID of the particular ambulance
+         * @param {string} equipmentId ID of the specific equipment
+         * @param {Equipment} equipment Equipment object that needs to be updated
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateEquipmentById(ambulanceId: string, equipmentId: string, equipment: Equipment, options?: any): AxiosPromise<Equipment> {
+            return localVarFp.updateEquipmentById(ambulanceId, equipmentId, equipment, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * EquipmentApi - interface
+ * @export
+ * @interface EquipmentApi
+ */
+export interface EquipmentApiInterface {
+    /**
+     * Create new equipment to a specific ambulance
+     * @summary Create new equipment to an ambulance
+     * @param {string} ambulanceId ID of the particular ambulance
+     * @param {Equipment} equipment Equipment object that needs to be created
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EquipmentApiInterface
+     */
+    createEquipment(ambulanceId: string, equipment: Equipment, options?: AxiosRequestConfig): AxiosPromise<Equipment>;
+
+    /**
+     * Delete a specific equipment item by its ID from a specific ambulance
+     * @summary Delete specific equipment
+     * @param {string} ambulanceId ID of the particular ambulance
+     * @param {string} equipmentId ID of the specific equipment
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EquipmentApiInterface
+     */
+    deleteEquipmentById(ambulanceId: string, equipmentId: string, options?: AxiosRequestConfig): AxiosPromise<void>;
+
+    /**
+     * Retrieve details of a specific equipment item by its ID from a specific ambulance
+     * @summary Get specific equipment details
+     * @param {string} ambulanceId ID of the particular ambulance
+     * @param {string} equipmentId ID of the specific equipment
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EquipmentApiInterface
+     */
+    getEquipmentById(ambulanceId: string, equipmentId: string, options?: AxiosRequestConfig): AxiosPromise<Equipment>;
+
+    /**
+     * Update details of a specific equipment item by its ID from a specific ambulance
+     * @summary Update specific equipment details
+     * @param {string} ambulanceId ID of the particular ambulance
+     * @param {string} equipmentId ID of the specific equipment
+     * @param {Equipment} equipment Equipment object that needs to be updated
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EquipmentApiInterface
+     */
+    updateEquipmentById(ambulanceId: string, equipmentId: string, equipment: Equipment, options?: AxiosRequestConfig): AxiosPromise<Equipment>;
+
+}
+
+/**
+ * EquipmentApi - object-oriented interface
+ * @export
+ * @class EquipmentApi
+ * @extends {BaseAPI}
+ */
+export class EquipmentApi extends BaseAPI implements EquipmentApiInterface {
+    /**
+     * Create new equipment to a specific ambulance
+     * @summary Create new equipment to an ambulance
+     * @param {string} ambulanceId ID of the particular ambulance
+     * @param {Equipment} equipment Equipment object that needs to be created
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EquipmentApi
+     */
+    public createEquipment(ambulanceId: string, equipment: Equipment, options?: AxiosRequestConfig) {
+        return EquipmentApiFp(this.configuration).createEquipment(ambulanceId, equipment, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Delete a specific equipment item by its ID from a specific ambulance
+     * @summary Delete specific equipment
+     * @param {string} ambulanceId ID of the particular ambulance
+     * @param {string} equipmentId ID of the specific equipment
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EquipmentApi
+     */
+    public deleteEquipmentById(ambulanceId: string, equipmentId: string, options?: AxiosRequestConfig) {
+        return EquipmentApiFp(this.configuration).deleteEquipmentById(ambulanceId, equipmentId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Retrieve details of a specific equipment item by its ID from a specific ambulance
+     * @summary Get specific equipment details
+     * @param {string} ambulanceId ID of the particular ambulance
+     * @param {string} equipmentId ID of the specific equipment
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EquipmentApi
+     */
+    public getEquipmentById(ambulanceId: string, equipmentId: string, options?: AxiosRequestConfig) {
+        return EquipmentApiFp(this.configuration).getEquipmentById(ambulanceId, equipmentId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Update details of a specific equipment item by its ID from a specific ambulance
+     * @summary Update specific equipment details
+     * @param {string} ambulanceId ID of the particular ambulance
+     * @param {string} equipmentId ID of the specific equipment
+     * @param {Equipment} equipment Equipment object that needs to be updated
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EquipmentApi
+     */
+    public updateEquipmentById(ambulanceId: string, equipmentId: string, equipment: Equipment, options?: AxiosRequestConfig) {
+        return EquipmentApiFp(this.configuration).updateEquipmentById(ambulanceId, equipmentId, equipment, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
  * EquipmentListApi - axios parameter creator
  * @export
  */
@@ -217,7 +615,7 @@ export const EquipmentListApiAxiosParamCreator = function (configuration?: Confi
         getEquipmentList: async (ambulanceId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'ambulanceId' is not null or undefined
             assertParamExists('getEquipmentList', 'ambulanceId', ambulanceId)
-            const localVarPath = `/equipment-list/{ambulanceId}`
+            const localVarPath = `/ambulances/{ambulanceId}/equipment`
                 .replace(`{${"ambulanceId"}}`, encodeURIComponent(String(ambulanceId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);

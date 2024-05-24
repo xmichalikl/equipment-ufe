@@ -20,7 +20,8 @@ export class XmichaliklEquipmentApp {
     const baseUri = new URL(this.basePath, document.baseURI || '/').pathname;
 
     const toRelative = (path: string) => {
-      if (path.startsWith(baseUri)) this.relativePath = path.slice(baseUri.length);
+      if (path === '/') this.relativePath = baseUri.replace(/\//g, '');
+      else if (path.startsWith(baseUri)) this.relativePath = path.slice(baseUri.length);
       else this.relativePath = '';
     };
 
@@ -41,6 +42,9 @@ export class XmichaliklEquipmentApp {
   render() {
     const [path, id] = this.relativePath.split('/');
 
+    console.log('path', `'${path}'`);
+    console.log('id', `'${id}'`);
+
     return (
       <Host>
         {path === 'ambulance-list' ? (
@@ -49,10 +53,24 @@ export class XmichaliklEquipmentApp {
             onAmbulance-detail={(event: CustomEvent<string>) => this.navigate(`equipment-list/${event.detail}`)}
           ></xmichalikl-ambulance-list>
         ) : path === 'equipment-list' ? (
-          <xmichalikl-equipment-list onEquipment-detail={(event: CustomEvent<string>) => this.navigate(`equipment-detail/${event.detail}`)}></xmichalikl-equipment-list>
+          <xmichalikl-equipment-list
+            apiBase={this.apiBase}
+            ambulanceId={id ?? ''}
+            onEquipment-detail={(event: CustomEvent<string>) => this.navigate(`equipment-detail/${event.detail}`)}
+            onGo-back={(event: CustomEvent<string>) => this.navigate(`ambulance-list`)}
+          ></xmichalikl-equipment-list>
         ) : path === 'equipment-detail' ? (
-          <xmichalikl-equipment-detail equipmentId={id ?? ''}></xmichalikl-equipment-detail>
-        ) : null}
+          <xmichalikl-equipment-detail
+            apiBase={this.apiBase}
+            ambulanceId={id.split(':')[0] ?? ''}
+            equipmentId={id.split(':')[1] ?? ''}
+            onEquipment-update={(event: CustomEvent<string>) => this.navigate(`equipment-list/${event.detail}`)}
+          ></xmichalikl-equipment-detail>
+        ) : (
+          <div class="error">
+            <h1>Page not found</h1>
+          </div>
+        )}
       </Host>
     );
   }
