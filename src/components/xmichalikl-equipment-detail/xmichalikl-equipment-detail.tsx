@@ -19,7 +19,7 @@ export class XmichaliklEquipmentDetail {
 
   private equipment: Equipment;
 
-  private async componentWillLoad() {
+  async componentWillLoad() {
     this.equipment = await this.getEquipmentAsync();
   }
 

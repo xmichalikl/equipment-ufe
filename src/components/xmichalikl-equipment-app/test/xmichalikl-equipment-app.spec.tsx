@@ -7,6 +7,7 @@ describe('xmichalikl-equipment-app', () => {
       components: [XmichaliklEquipmentApp],
       html: `<xmichalikl-equipment-app></xmichalikl-equipment-app>`,
     });
+    console.log(page);
     expect(1).toEqual(1);
   });
 });

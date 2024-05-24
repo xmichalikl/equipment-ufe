@@ -7,6 +7,7 @@ describe('xmichalikl-equipment-detail', () => {
       components: [XmichaliklEquipmentDetail],
       html: `<xmichalikl-equipment-detail></xmichalikl-equipment-detail>`,
     });
+    console.log(page);
     expect(1).toEqual(1);
   });
 });

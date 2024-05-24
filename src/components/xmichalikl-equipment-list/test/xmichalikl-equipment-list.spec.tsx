@@ -7,6 +7,7 @@ describe('xmichalikl-equipment-list', () => {
       components: [XmichaliklEquipmentList],
       html: `<xmichalikl-equipment-list></xmichalikl-equipment-list>`,
     });
+    console.log(page);
     expect(1).toEqual(1);
   });
 });

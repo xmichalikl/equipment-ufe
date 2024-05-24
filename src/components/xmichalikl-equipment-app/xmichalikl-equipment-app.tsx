@@ -57,7 +57,7 @@ export class XmichaliklEquipmentApp {
             apiBase={this.apiBase}
             ambulanceId={id ?? ''}
             onEquipment-detail={(event: CustomEvent<string>) => this.navigate(`equipment-detail/${event.detail}`)}
-            onGo-back={(event: CustomEvent<string>) => this.navigate(`ambulance-list`)}
+            onGo-back={() => this.navigate(`ambulance-list`)}
           ></xmichalikl-equipment-list>
         ) : path === 'equipment-detail' ? (
           <xmichalikl-equipment-detail
