@@ -20,14 +20,11 @@ export class XmichaliklEquipmentApp {
     const baseUri = new URL(this.basePath, document.baseURI || '/').pathname;
 
     const toRelative = (path: string) => {
-      console.log('baseUri', `'${baseUri}'`);
-      console.log('toRelative (path)', `'${path}'`);
-
-      if (path === '/') this.relativePath = baseUri.replace(/\//g, '');
-      else if (path.startsWith(baseUri)) this.relativePath = path.slice(baseUri.length);
-      else this.relativePath = '';
-
-      console.log('toRelative (relativePath)', `'${this.relativePath}'`);
+      if (path === '/' || path === this.basePath || path === this.basePath.slice(0, -1)) {
+        this.relativePath = baseUri.replace(/\//g, '');
+      } else if (path.startsWith(baseUri)) {
+        this.relativePath = path.slice(baseUri.length);
+      } else this.relativePath = '';
     };
 
     window.navigation?.addEventListener('navigate', (ev: Event) => {
@@ -47,12 +44,9 @@ export class XmichaliklEquipmentApp {
   render() {
     const [path, id] = this.relativePath.split('/');
 
-    console.log('path', `'${path}'`);
-    console.log('id', `'${id}'`);
-
     return (
       <Host>
-        {path === 'ambulance-list' ? (
+        {path === this.basePath.replace(/\//g, '') ? (
           <xmichalikl-ambulance-list
             api-base={this.apiBase}
             onAmbulance-detail={(event: CustomEvent<string>) => this.navigate(`equipment-list/${event.detail}`)}
@@ -62,7 +56,7 @@ export class XmichaliklEquipmentApp {
             apiBase={this.apiBase}
             ambulanceId={id ?? ''}
             onEquipment-detail={(event: CustomEvent<string>) => this.navigate(`equipment-detail/${event.detail}`)}
-            onGo-back={() => this.navigate(`ambulance-list`)}
+            onGo-back={() => this.navigate(this.basePath)}
           ></xmichalikl-equipment-list>
         ) : path === 'equipment-detail' ? (
           <xmichalikl-equipment-detail
