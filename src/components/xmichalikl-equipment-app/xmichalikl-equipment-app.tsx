@@ -20,9 +20,14 @@ export class XmichaliklEquipmentApp {
     const baseUri = new URL(this.basePath, document.baseURI || '/').pathname;
 
     const toRelative = (path: string) => {
+      console.log('baseUri', `'${baseUri}'`);
+      console.log('toRelative (path)', `'${path}'`);
+
       if (path === '/') this.relativePath = baseUri.replace(/\//g, '');
       else if (path.startsWith(baseUri)) this.relativePath = path.slice(baseUri.length);
       else this.relativePath = '';
+
+      console.log('toRelative (relativePath)', `'${this.relativePath}'`);
     };
 
     window.navigation?.addEventListener('navigate', (ev: Event) => {
