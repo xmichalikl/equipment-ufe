@@ -56,9 +56,8 @@ export class XmichaliklEquipmentDetail {
         ? await api.updateEquipmentById(this.ambulanceId, this.equipmentId, this.equipment)
         : await api.createEquipment(this.ambulanceId, this.equipment);
 
-      console.log(response);
       if (response.status < 299) {
-        //this.equipmentUpdate.emit(this.ambulanceId);
+        this.equipmentUpdate.emit(this.ambulanceId);
       } else {
         this.errorMessage = `Cannot store entry: ${response.statusText}`;
       }
@@ -70,9 +69,9 @@ export class XmichaliklEquipmentDetail {
   private async deleteEquipment() {
     try {
       const response = await EquipmentApiFactory(undefined, this.apiBase).deleteEquipmentById(this.ambulanceId, this.equipmentId);
-      console.log(response);
+
       if (response.status < 299) {
-        //this.equipmentUpdate.emit(this.ambulanceId);
+        this.equipmentUpdate.emit(this.ambulanceId);
       } else {
         this.errorMessage = `Cannot delete entry: ${response.statusText}`;
       }
@@ -174,6 +173,7 @@ export class XmichaliklEquipmentDetail {
                   <div class="form-radios">
                     <div class="form-row">
                       <md-radio
+                        name="condition"
                         value="1"
                         touch-target="wrapper"
                         checked={this.equipment.inspectionInterval === 1}
@@ -186,6 +186,7 @@ export class XmichaliklEquipmentDetail {
 
                     <div class="form-row">
                       <md-radio
+                        name="condition"
                         value="3"
                         touch-target="wrapper"
                         checked={this.equipment.inspectionInterval === 3}
@@ -198,6 +199,7 @@ export class XmichaliklEquipmentDetail {
 
                     <div class="form-row">
                       <md-radio
+                        name="condition"
                         value="6"
                         touch-target="wrapper"
                         checked={this.equipment.inspectionInterval === 6}
@@ -210,6 +212,7 @@ export class XmichaliklEquipmentDetail {
 
                     <div class="form-row">
                       <md-radio
+                        name="condition"
                         value="12"
                         touch-target="wrapper"
                         checked={this.equipment.inspectionInterval === 12}

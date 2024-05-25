@@ -4,7 +4,7 @@
     "useDocker": true,
     "version": "6.6.0",
     "generators": {
-      "ambulance-wl": {
+      "equipment": {
         "generatorName": "typescript-axios",
         "glob": "api/equipment.openapi.yaml",
         "output": "#{cwd}/src/api/equipment",
