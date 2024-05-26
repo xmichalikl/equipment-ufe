@@ -9,10 +9,12 @@ describe('xmichalikl-ambulance-list', () => {
     {
       id: '12345',
       name: 'Ambulancia 1',
+      equipment: [],
     },
     {
       id: '12345',
       name: 'Ambulancia 2',
+      equipment: [],
     },
   ];
 
