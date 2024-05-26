@@ -266,7 +266,7 @@ components:
   schemas:
     Ambulance:
       type: object
-      required: [id, name]
+      required: [id, name, equipment]
       properties:
         id:
           type: string
@@ -276,6 +276,7 @@ components:
           description: Name of the ambulance
         equipment:
           type: array
+          description: List of the ambulance equipment
           items:
             $ref: '#/components/schemas/Equipment'
       example:

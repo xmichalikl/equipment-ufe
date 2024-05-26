@@ -42,11 +42,11 @@ export interface Ambulance {
      */
     'name': string;
     /**
-     * 
+     * List of the ambulance equipment
      * @type {Array<Equipment>}
      * @memberof Ambulance
      */
-    'equipment'?: Array<Equipment>;
+    'equipment': Array<Equipment>;
 }
 /**
  * 
